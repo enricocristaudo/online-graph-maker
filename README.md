@@ -1,51 +1,75 @@
-# React + TypeScript + Vite
+# Online Graph Maker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive web app for creating and visualizing graphs and other data structures.
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a web application built with React that serves as an educational tool for students, teachers, and data structure enthusiasts.
 
-## Expanding the ESLint configuration
+The main goal is to enable the creation, modification, and visualization of directed and weighted graphs, with export options in multiple formats.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+💡 Upcoming features: Support for trees, heaps, and other data structures.
 
-- Configure the top-level `parserOptions` property like this:
+## Current features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Create directed and weighted graphs
+- View the adjacency matrix
+- Dynamically edit edge weights
+- Intuitive and interactive interface
+- Resizable canvas for better usability
+
+## Upcoming Features
+
+- Export graphs as SVG, PNG, JPG
+- Export the adjacency matrix in LaTeX format
+- Support for trees, heaps, and other data structures
+- Implementation of graph algorithms (Dijkstra, BFS, DFS, etc.)
+
+## Technologies Used
+
+- [React](https://react.dev/) + TypeScript
+- [TailwindCSS](https://tailwindcss.com/) for styling
+- [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for rendering graphs
+- [Vite](https://vite.dev/) for fast development
+
+---
+
+## Installation & Usage
+
+#### Try it online
+
+You can use GraphVisualizer directly at:
+🔗 https://enricocristaudo.github.io/online-graph-maker
+
+#### Run locally
+1️⃣ Clone the repository
+```sh
+git clone https://github.com/enricocristaudo/online-graph-maker.git
+cd online-graph-maker
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2️⃣ Install dependencies
+```sh
+npm install
 ```
-# online-graph-maker
+3️⃣ Start the development server
+```sh
+npm run dev
+```
+The app will be available at your localhost
+
+## Contributing
+
+We welcome contributions! </br>
+If you’d like to improve the app, feel free to open a [pull request](https://github.com/enricocristaudo/online-graph-maker/pulls) or report an [issue](https://github.com/enricocristaudo/online-graph-maker/issues)
+
+## Licence
+
+This application is released under GNU GPLv3 Licence (see [LICENSE](LICENSE)). </br>
+Some of the used libraries are released under different licenses.
+
+---
+
+### Contact
+
+📧 Email: enricocristaudo202@gmail.com </br>
+🐙 GitHub: @enricocristaudo
