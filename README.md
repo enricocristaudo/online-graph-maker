@@ -64,7 +64,7 @@ If you’d like to improve the app, feel free to open a [pull request](https://g
 
 ## Licence
 
-This application is released under MIT Licence (see [LICENSE](LICENSE)). </br>
+This application is released under GNU GPLv3 Licence (see [LICENSE](LICENSE)). </br>
 Some of the used libraries are released under different licenses.
 
 ---
