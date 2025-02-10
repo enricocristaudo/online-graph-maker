@@ -74,6 +74,7 @@ const Canvas: React.FC<CanvasProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    canvas.style.backgroundColor = "#fafafa";
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     window.addEventListener("mousemove", handleMouseMove);
@@ -210,7 +211,6 @@ const Canvas: React.FC<CanvasProps> = ({
         ref={canvasRef}
         width={width}
         height={window.innerHeight}
-        className="bg-gray-100"
         onMouseDown={handleMouseDown}
       />
       <div

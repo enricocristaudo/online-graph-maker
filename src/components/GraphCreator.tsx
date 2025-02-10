@@ -4,6 +4,7 @@ import Matrix from "./Matrix";
 import Node from "../lib/classes/Node";
 import "../styles.css";
 import MenuButtons from "./MenuButtons";
+import MatrixLatexCode from "./MatrixLatexCode";
 // import DeleteNodeButton from "./DeleteNodeButton";
 
 const GraphCreator: React.FC = () => {
@@ -101,7 +102,11 @@ const GraphCreator: React.FC = () => {
                 setNodesClicked(0);
               }}
             />
-            <Matrix matrix={matrix} onMatrixChange={handleMatrixChange} />
+            {matrix.length > 0
+              ? <Matrix matrix={matrix} onMatrixChange={handleMatrixChange} />
+              : <p className="text-sm text-gray-700 mx-5">Tap on the canvas to add a node</p>
+            }
+            <MatrixLatexCode matrix={matrix}/>
           </div>
           {/* <DeleteNodeButton
             onDelete={handleDeleteNode}
