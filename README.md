@@ -27,10 +27,10 @@ The main goal is to enable the creation, modification, and visualization of dire
 
 ## Technologies Used
 
-- React + TypeScript
-- TailwindCSS for styling
-- Canvas API for rendering graphs
-- Vite for fast development
+- [React](https://react.dev/) + TypeScript
+- [TailwindCSS](https://tailwindcss.com/) for styling
+- [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for rendering graphs
+- [Vite](https://vite.dev/) for fast development
 
 ---
 
@@ -59,17 +59,17 @@ The app will be available at your localhost
 
 ## Contributing
 
-We welcome contributions!
-If you’d like to improve the app, feel free to open a pull request or report an issue
+We welcome contributions! </br>
+If you’d like to improve the app, feel free to open a [pull request](https://github.com/enricocristaudo/online-graph-maker/pulls) or report an [issue](https://github.com/enricocristaudo/online-graph-maker/issues)
 
 ## Licence
 
-This application is released under MIT Licence (see [LICENSE](LICENSE)).
+This application is released under MIT Licence (see [LICENSE](LICENSE)). </br>
 Some of the used libraries are released under different licenses.
 
 ---
 
 ### Contact
 
-📧 Email: enricocristaudo202@gmail.com
+📧 Email: enricocristaudo202@gmail.com </br>
 🐙 GitHub: @enricocristaudo
