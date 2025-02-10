@@ -4,7 +4,7 @@ import Matrix from "./Matrix";
 import Node from "../lib/classes/Node";
 import "../styles.css";
 import MenuButtons from "./MenuButtons";
-import DeleteNodeButton from "./DeleteNodeButton";
+// import DeleteNodeButton from "./DeleteNodeButton";
 
 const GraphCreator: React.FC = () => {
   const [nodes, setNodes] = useState<Node[]>([]);
@@ -30,29 +30,29 @@ const GraphCreator: React.FC = () => {
     });
   }, [matrix]);
 
-  const handleDeleteNode = () => {
-    if (sourceNode === null) return;
+  // const handleDeleteNode = () => {
+  //   if (sourceNode === null) return;
 
-    setNodes((prevNodes) => {
-      return prevNodes
-        .filter((node) => node.value !== sourceNode.value)
-        .map((node) => {
-          node.edges = new Set(
-            [...node.edges].filter(
-              (edge) => edge.target.value !== sourceNode.value
-            )
-          );
-          return node;
-        });
-    });
-    setMatrix((prevMatrix) => {
-      return prevMatrix
-        .filter((_, i) => i !== sourceNode.value)
-        .map((row) => row.filter((_, j) => j !== sourceNode.value));
-    });
+  //   setNodes((prevNodes) => {
+  //     return prevNodes
+  //       .filter((node) => node.value !== sourceNode.value)
+  //       .map((node) => {
+  //         node.edges = new Set(
+  //           [...node.edges].filter(
+  //             (edge) => edge.target.value !== sourceNode.value
+  //           )
+  //         );
+  //         return node;
+  //       });
+  //   });
+  //   setMatrix((prevMatrix) => {
+  //     return prevMatrix
+  //       .filter((_, i) => i !== sourceNode.value)
+  //       .map((row) => row.filter((_, j) => j !== sourceNode.value));
+  //   });
 
-    setSourceNode(null);
-  };
+  //   setSourceNode(null);
+  // };
 
   const handleMatrixChange = (i: number, j: number, value: string) => {
     if (value === "" || value === "-") {
