@@ -8,8 +8,8 @@ interface CanvasProps {
   setMatrix: React.Dispatch<React.SetStateAction<number[][]>>;
   sourceNode: Node | null;
   setSourceNode: React.Dispatch<React.SetStateAction<Node | null>>;
-  nodesClicked: number;
-  setNodesClicked: React.Dispatch<React.SetStateAction<number>>;
+  extracted: Set<number>;
+  setExtracted: React.Dispatch<React.SetStateAction<Set<number>>>;
 }
 
 const Canvas: React.FC<CanvasProps> = ({
@@ -19,13 +19,13 @@ const Canvas: React.FC<CanvasProps> = ({
   setMatrix,
   sourceNode,
   setSourceNode,
-  nodesClicked,
-  setNodesClicked,
+  extracted,
+  setExtracted,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   let activeNode: Node | null = null;
   let isDragging = false;
-  const [width, setWidth] = useState(window.innerHeight);
+  const [width, setWidth] = useState(window.innerWidth / 2);
   const [isResizing, setIsResizing] = useState(false);
 
 
@@ -156,14 +156,12 @@ const Canvas: React.FC<CanvasProps> = ({
       for (let n of nodes) {
         if (n.containsPoint(mouse.x, mouse.y)) {
           n.changeColor(n.isClicked ? "white" : "#86efac");
-          setNodesClicked((prev) => prev + 1);
 
-          if (nodesClicked === 0) {
+          if (!sourceNode) {
             setSourceNode(n);
-          } else if (nodesClicked === 1 && sourceNode) {
+          } else {
             connectNodes(sourceNode, n);
             setSourceNode(null);
-            setNodesClicked(0);
           }
           return;
         }
@@ -172,7 +170,13 @@ const Canvas: React.FC<CanvasProps> = ({
     };
 
     const addNode = (x: number, y: number) => {
-      const newNode = new Node(x, y, nodes.length, ctx);
+      let value = 0;
+      do {
+        value = Math.floor(Math.random() * 100) + 1;
+      } while (extracted.has(value));
+
+      setExtracted((prev) => new Set(prev).add(value));
+      const newNode = new Node(x, y, nodes.length, value, ctx);
 
       setNodes((prevNodes) => [...prevNodes, newNode]);
 
@@ -186,9 +190,9 @@ const Canvas: React.FC<CanvasProps> = ({
       source.changeColor("white");
       target.changeColor("white");
       const newMatrix = [...matrix];
-      newMatrix[source.value][target.value] = 1;
+      newMatrix[source.id][target.id] = 1;
 
-      source.addEdge(target, matrix[source.value][target.value]);
+      source.addEdge(target, matrix[source.id][target.id]);
       setMatrix(newMatrix);
     };
 
@@ -203,7 +207,7 @@ const Canvas: React.FC<CanvasProps> = ({
       canvas.removeEventListener("mouseup", handleMouseUp);
       canvas.removeEventListener("click", handleClick);
     };
-  }, [nodes, matrix, sourceNode, nodesClicked]);
+  }, [nodes, matrix, sourceNode]);
 
   return (
     <div className="relative">

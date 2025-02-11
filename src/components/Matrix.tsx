@@ -30,8 +30,9 @@ const Matrix: React.FC<MatrixProps> = ({ matrix, onMatrixChange }) => {
                   {row.map((cell, j) => (
                      <Input
                         key={j}
-                        value={cell.toString()}
+                        value={cell.toString() !== "" ? cell.toString() : 0}
                         onChange={(e) => onMatrixChange(i, j, e.target.value)}
+                        onFocus={(e) => e.target.select()}
                         className="w-12 h-12 p-0 text-center font-mono"
                      />
                   ))}

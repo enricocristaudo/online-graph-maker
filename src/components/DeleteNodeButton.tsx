@@ -1,6 +1,7 @@
 import React from "react";
 import Node from "@/lib/classes/Node";
 import { Button } from "./ui/button";
+import { X } from "lucide-react";
 
 interface DeleteNodeButtonProps {
    selectedNode: Node | null;
@@ -12,10 +13,10 @@ const DeleteNodeButton: React.FC<DeleteNodeButtonProps> = ({ selectedNode, onDel
       <Button
          onClick={onDelete}
          disabled={selectedNode === null} // Disabilitato se nessun nodo è selezionato
-         variant="destructive"
+         variant="outline"
          className="m-5 w-fit"
       >
-         Elimina Nodo
+         Elimina Nodo <X />
       </Button>
    );
 };

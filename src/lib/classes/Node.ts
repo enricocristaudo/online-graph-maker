@@ -5,6 +5,7 @@ class Node {
    y: number;
    offsetX: number;
    offsetY: number;
+   id: number;
    value: number;
    color: string;
    radius: number;
@@ -12,11 +13,12 @@ class Node {
    edges: Set<Edge>;
    ctx: CanvasRenderingContext2D;
 
-   constructor(x: number, y: number, value: number, ctx: CanvasRenderingContext2D) {
+   constructor(x: number, y: number, id:number, value: number, ctx: CanvasRenderingContext2D) {
       this.x = x;
       this.y = y;
       this.offsetX = x;
       this.offsetY = y;
+      this.id = id;
       this.value = value;
       this.color = "white";
       this.radius = 30;
@@ -39,6 +41,10 @@ class Node {
       this.ctx.textAlign = "center";
       this.ctx.font = "20px Monospace";
       this.ctx.fillText(this.value.toString(), this.x, this.y);
+      this.ctx.font = "10px Monospace";
+      this.ctx.fillStyle = "gray";
+      this.ctx.fillText(`#${this.id.toString()}`, this.x, this.y+20);
+      this.ctx.fillStyle = "black";
       this.edges.forEach((edge) => edge.draw());
    }
 

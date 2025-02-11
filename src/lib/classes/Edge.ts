@@ -13,7 +13,7 @@ class Edge {
    }
 
    draw(): void {
-      if (this.weight === -1) return;
+      if (this.weight === 0) return;
       const arrowSize = 10;
 
       if (this.source === this.target) {

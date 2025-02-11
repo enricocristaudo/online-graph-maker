@@ -5,13 +5,13 @@ import Node from "../lib/classes/Node";
 import "../styles.css";
 import MenuButtons from "./MenuButtons";
 import MatrixLatexCode from "./MatrixLatexCode";
-// import DeleteNodeButton from "./DeleteNodeButton";
+import DeleteNodeButton from "./DeleteNodeButton";
 
 const GraphCreator: React.FC = () => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [matrix, setMatrix] = useState<number[][]>([]);
   const [sourceNode, setSourceNode] = useState<Node | null>(null);
-  const [nodesClicked, setNodesClicked] = useState<number>(0);
+  const [extracted, setExtracted] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     setNodes((prevNodes) => {
@@ -20,10 +20,8 @@ const GraphCreator: React.FC = () => {
         for (let j = 0; j < newNodes.length; j++) {
           newNodes[i].removeEdge(newNodes[j]);
           const weight = matrix[i][j];
-          if (weight !== -1 && weight !== 0) {
+          if (weight != 0) {
             newNodes[i].addEdge(newNodes[j], weight);
-          } else {
-            newNodes[i].removeEdge(newNodes[j]);
           }
         }
       }
@@ -31,32 +29,44 @@ const GraphCreator: React.FC = () => {
     });
   }, [matrix]);
 
-  // const handleDeleteNode = () => {
-  //   if (sourceNode === null) return;
+  const handleDeleteNode = () => {
+    if (sourceNode === null) return;
 
-  //   setNodes((prevNodes) => {
-  //     return prevNodes
-  //       .filter((node) => node.value !== sourceNode.value)
-  //       .map((node) => {
-  //         node.edges = new Set(
-  //           [...node.edges].filter(
-  //             (edge) => edge.target.value !== sourceNode.value
-  //           )
-  //         );
-  //         return node;
-  //       });
-  //   });
-  //   setMatrix((prevMatrix) => {
-  //     return prevMatrix
-  //       .filter((_, i) => i !== sourceNode.value)
-  //       .map((row) => row.filter((_, j) => j !== sourceNode.value));
-  //   });
+    setNodes((prevNodes) => {
+      const newNodes = prevNodes
+        .filter((node) => node.id !== sourceNode.id)
+        .map((node) => {
+          node.edges = new Set(
+            [...node.edges].filter(
+              (edge) => edge.target.id !== sourceNode.id
+            )
+          );
+          return node;
+        });
+      return newNodes;
+    });
+    setMatrix((prevMatrix) => {
+      return prevMatrix
+        .filter((_, i) => i !== sourceNode.id)
+        .map((row) => row.filter((_, j) => j !== sourceNode.id));
+    });
 
-  //   setSourceNode(null);
-  // };
+    setNodes((prevNodes) =>
+      prevNodes.map((node) => {
+        if (node.id > sourceNode.id) {
+          const newNode = Object.create(node); // Mantiene il prototipo
+          newNode.id = node.id - 1; // Modifica solo l'ID
+          return newNode;
+        }
+        return node;
+      })
+    );
+
+    setSourceNode(null);
+  };
 
   const handleMatrixChange = (i: number, j: number, value: string) => {
-    if (value === "" || value === "-") {
+    if (value == "" || value === "-" || value == "0") {
       setMatrix((prevMatrix) => {
         const newMatrix = prevMatrix.map((row) => [...row]);
         newMatrix[i][j] = value as unknown as number;
@@ -79,18 +89,26 @@ const GraphCreator: React.FC = () => {
   return (
     <>
       <div className="flex">
-        <Canvas
-          {...{
-            nodes,
-            setNodes,
-            matrix,
-            setMatrix,
-            sourceNode,
-            setSourceNode,
-            nodesClicked,
-            setNodesClicked,
-          }}
-        />
+        <div className="relative">
+          <Canvas
+            {...{
+              nodes,
+              setNodes,
+              matrix,
+              setMatrix,
+              sourceNode,
+              setSourceNode,
+              extracted,
+              setExtracted,
+            }}
+          />
+          <div className="absolute bottom-2 right-2">
+            <DeleteNodeButton
+              onDelete={handleDeleteNode}
+              selectedNode={sourceNode}
+            />
+          </div>
+        </div>
         <div className="flex flex-col justify-between">
           <div>
             <MenuButtons
@@ -99,7 +117,7 @@ const GraphCreator: React.FC = () => {
                 setNodes([]);
                 setMatrix([]);
                 setSourceNode(null);
-                setNodesClicked(0);
+                setExtracted(new Set());
               }}
             />
             {matrix.length > 0
