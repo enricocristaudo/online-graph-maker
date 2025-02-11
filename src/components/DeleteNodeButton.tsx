@@ -16,7 +16,7 @@ const DeleteNodeButton: React.FC<DeleteNodeButtonProps> = ({ selectedNode, onDel
          variant="outline"
          className="m-5 w-fit"
       >
-         Elimina Nodo <X />
+         Delete node <X />
       </Button>
    );
 };
