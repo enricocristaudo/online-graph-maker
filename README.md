@@ -28,7 +28,7 @@ The main goal is to enable the creation, modification, and visualization of dire
 ## Technologies Used
 
 - [React](https://react.dev/) + TypeScript
-- [TailwindCSS](https://tailwindcss.com/) for styling
+- [TailwindCSS](https://tailwindcss.com/) & [shadcn](https://ui.shadcn.com/) for styling
 - [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for rendering graphs
 - [Vite](https://vite.dev/) for fast development
 
